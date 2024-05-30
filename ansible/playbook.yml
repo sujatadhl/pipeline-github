@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: true
+  connection: local 
   gather_facts: true
 
   vars:
@@ -10,58 +11,58 @@
     ansible_aws_ssm_timeout: 3000
 
   tasks:
-      - name: Install nginx
-        ansible.builtin.yum:
-          name: "{{ item }}"
-          state: latest 
-        loop: 
-          - nginx
-          - python
-          - awscli
-          - nodejs
-          - npm 
-      
-      - name: Change Nginx Configuration file   
-        ansible.builtin.template:
-          src: files/nginx.conf.j2
-          dest: {{" nginx_path "}}
+    - name: Install nginx
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: latest 
+      loop: 
+        - nginx
+        - python
+        - awscli
+        - nodejs
+        - npm 
+    
+    - name: Change Nginx Configuration file   
+      ansible.builtin.template:
+        src: files/nginx.conf.j2
+        dest: {{" nginx_path "}}
 
-      - name: Ensure Python3 pip is installed
-        ansible.builtin.yum:
-          name: python3-pip
-          state: present
+    - name: Ensure Python3 pip is installed
+      ansible.builtin.yum:
+        name: python3-pip
+        state: present
 
-      - name: Install botocore and boto3 
-        ansible.builtin.pip:
-          name: "{{ item }}"
-        loop:  
-          - botocore
-          - boto3   
-              
-      - name: Make folder in EC2 instance
-        ansible.builtin.file:
-            path: /home/react-app
-            state: directory
-            mode: '0755'
-          
-      - name: Copy React-app folder from S3 to EC2
-        ansible.builtin.git: 
-          cmd: aws s3 cp s3://sujata-pipeline/react-app /home/ubuntu/react-app --recursive
-
-      - name: Install PM2 globally
-        ansible.builtin.npm:
-          name: pm2
-          global: yes
-
-      - name: Install dependencies
-        ansible.builtin.npm:
+    - name: Install botocore and boto3 
+      ansible.builtin.pip:
+        name: "{{ item }}"
+      loop:  
+        - botocore
+        - boto3   
+            
+    - name: Make folder in EC2 instance
+      ansible.builtin.file:
           path: /home/react-app
+          state: directory
+          mode: '0755'
+        
+    - name: Copy React-app folder from git
+      ansible.builtin.git: 
+        cmd: git clone 
 
-      - name: Start the react app 
-        ansible.builtin.command: pm2 start --name react-app npm -- start
-        args:
-          chdir: /home/react-app
-        notify: Restart Nginx 
+    - name: Install PM2 globally
+      ansible.builtin.npm:
+        name: pm2
+        global: yes
+
+    - name: Install dependencies
+      ansible.builtin.npm:
+        path: /home/react-app
+
+    - name: Start the react app 
+      ansible.builtin.command: pm2 start --name react-app npm -- start
+      args:
+        chdir: /home/react-app
+      notify: Restart Nginx 
 
   handlers:
     - name: Restart Nginx
