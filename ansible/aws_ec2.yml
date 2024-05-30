@@ -1,0 +1,11 @@
+plugin: aws_ec2
+regions:
+  - us-east-1
+filters:
+   tag:Name: sujata-ec2
+   tag:owner: sujata.dahal
+   instance-state-name: running
+hostnames: 
+  - instance-id   
+groups: 
+  nginx: "'sujata-ec2' in tags.Name"  
