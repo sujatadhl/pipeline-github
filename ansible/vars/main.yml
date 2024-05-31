@@ -1,1 +1,1 @@
-nginx_path: /etc/nginx/sites-available/default
+nginx_path: /etc/nginx/nginx.conf
