@@ -24,7 +24,7 @@
     - name: Change Nginx Configuration file   
       ansible.builtin.template:
         src: files/nginx.conf.j2
-        dest: {{" nginx_path "}}
+        dest: "{{ nginx_path }}"
 
     - name: Ensure Python3 pip is installed
       ansible.builtin.yum:
@@ -46,7 +46,7 @@
         
     - name: Copy React-app folder from git
       ansible.builtin.git: 
-        repo: "https://github.com/sujatadhl/pipeline-github.git"
+        repo: "https://github.com/sujatadhl/pipeline-github.git/react-app"
         dest: "/home/react-app"
         version: "git-actions"
 
