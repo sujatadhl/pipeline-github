@@ -10,6 +10,11 @@
     ansible_aws_ssm_timeout: 3000
 
   tasks:
+    - name: Install EPEL repository (required for some packages)
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
+
     - name: Install nginx
       ansible.builtin.yum:
         name: "{{ item }}"
