@@ -27,8 +27,8 @@ module "ec2" {
     sudo yum install git 
 
     sudo python3.8 -m pip install ansible
-    python3.8 -m pip install botocore
-    python3.8 -m pip install boto3
+    sudo python3.8 -m pip install botocore
+    sudo python3.8 -m pip install boto3
 
     ansible-pull -U https://github.com/sujatadhl/pipeline-github.git -i aws_ec2.yml -C github-actions ansible/playbook.yml
 
