@@ -10,17 +10,20 @@
     ansible_aws_ssm_timeout: 3000
 
   tasks:
-    # - name: Install EPEL repository (required for some packages)
-    #   ansible.builtin.amazon-linux-extras:
-    #     name: epel-release
-    #     state: present
+    - name: Update all packages
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+
+    - name: Install Nginx from Amazon Linux Extras
+      ansible.builtin.command:
+        cmd: amazon-linux-extras install nginx1 -y
 
     - name: Install nginx
-      ansible.builtin.amazon-linux-extras:
+      ansible.builtin.yum:
         name: "{{ item }}"
-        state: latest 
+        state: present
       loop: 
-        - nginx
         - python
         - awscli
         - nodejs
