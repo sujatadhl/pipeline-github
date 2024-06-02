@@ -1,3 +1,8 @@
+- name: Install amazon-linux-extras
+  yum:
+    name: amazon-linux-extras
+    state: present
+
 - name: Install Nginx
   ansible.builtin.command: amazon_linux_extras install nginx1 -y
 
