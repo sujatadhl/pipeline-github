@@ -1,13 +1,9 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command exits with a non-zero status
-
-cd /home
+cd /home/ssm-user/
 sudo yum update -y
 
-if ! command -v python3.8 &> /dev/null; then
-    sudo amazon-linux-extras install -y python3.8
-fi
+sudo amazon-linux-extras install -y python3.8
 
 sudo python3.8 -m ensurepip
 sudo python3.8 -m pip install --upgrade pip
