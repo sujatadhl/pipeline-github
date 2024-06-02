@@ -7,7 +7,5 @@ filters:
   instance-state-name: running
 hostnames:
   - instance-id
-compose:
-  ansible_host: public_ip_address
 groups:
   nginx: "'sujata-ec2' in tags.Name"

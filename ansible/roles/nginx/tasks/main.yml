@@ -1,12 +1,6 @@
-- name: Install EPEL repository
-  amazon.aws.amazon_linux_extras:
-    name: epel
-    state: present
-    
 - name: Install Nginx
-  yum:
-    name: nginx
-    state: present
+  ansible.builtin.command:
+    cmd: amazon_linux_extras install nginx
 
 - name: Start and enable Nginx
   systemd:
