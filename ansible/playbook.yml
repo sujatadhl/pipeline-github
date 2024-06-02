@@ -15,15 +15,12 @@
         name: "*"
         state: latest
 
-    - name: Install Nginx from Amazon Linux Extras
-      ansible.builtin.command:
-        cmd: amazon-linux-extras install nginx1 -y
-
     - name: Install nginx
       ansible.builtin.yum:
         name: "{{ item }}"
         state: present
       loop: 
+        - nginx
         - python
         - awscli
         - nodejs

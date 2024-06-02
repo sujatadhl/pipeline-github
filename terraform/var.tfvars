@@ -15,5 +15,5 @@ name      = {
    name1= "sujata-ec2"
 }
 
-ami_id    = "ami-0d94353f7bad10668"
+ami_id    = "ami-033a1ebf088e56e81"
 # bucket_name =       "sujata-pipeline"
