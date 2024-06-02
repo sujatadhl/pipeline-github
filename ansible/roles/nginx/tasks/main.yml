@@ -1,6 +1,5 @@
 - name: Install Nginx
-  ansible.builtin.command:
-    cmd: amazon_linux_extras install nginx1 -y
+  ansible.builtin.command: amazon_linux_extras install nginx1 -y
 
 - name: Start and enable Nginx
   systemd:
