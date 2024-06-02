@@ -7,5 +7,5 @@ filters:
    instance-state-name: running
 hostnames: 
   - instance-id   
-# groups: 
-#   nginx: "'sujata-ec2' in tags.Name"  
+groups: 
+  nginx: "'sujata-ec2' in tags.Name"  
