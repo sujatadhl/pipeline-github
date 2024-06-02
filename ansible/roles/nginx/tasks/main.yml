@@ -1,4 +1,3 @@
----
 - name: Install EPEL repository
   amazon.aws.amazon_linux_extras:
     name: epel
