@@ -8,8 +8,9 @@ sudo python3.8 -m pip install --upgrade pip
 sudo yum install git 
 
 sudo python3.8 -m pip install ansible
-sudo yum install awscli
+sudo amazon-linux-extras install -y awscli
 
-aws cp s3://sujata-backen/ansible cd /home
+aws s3 cp s3://sujata-backend/ansible cd /home/ansible
 
+cd /home/ansible
 ansible-playbook -i aws_ec2.yml playbook.yml

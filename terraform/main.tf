@@ -11,6 +11,7 @@ module "ec2" {
   iam_role_description = "SSM Role for accessing EC2 instance"
   iam_role_policies = {
     SSM = var.ssm_policy
+    EC2 = var.ec2_policy
   }
   key_name = try(var.key_name, null)
   tags = {
@@ -18,8 +19,3 @@ module "ec2" {
   }
     
 }
-
-# #S3 Bucket
-# resource "aws_s3_bucket" "sujata_pipeline" {
-#     bucket = var.bucket_name  
-# }
