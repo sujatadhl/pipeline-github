@@ -45,7 +45,7 @@ jobs:
         - name: Run user data
           run: |
             cd terraform
-            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --subnet-id subnet-0f97b0bb45cdeb3b7 --user-data file://userdata.txt
+            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --subnet-id subnet-0f97b0bb45cdeb3b7 --user-data file://userdata.sh
 
       
                 
