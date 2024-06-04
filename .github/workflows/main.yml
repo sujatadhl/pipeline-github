@@ -41,7 +41,7 @@ jobs:
           run: |
             cd terraform
             sudo apt install awscli
-            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --user-data file://./terraform/user-data.sh
+            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --user-data file://./terraform/userdata.sh
 
   
         
