@@ -13,6 +13,7 @@ module "ec2" {
     SSM = var.ssm_policy
     EC2 = var.ec2_policy
   }
+  user_data = file("userdata.sh")
   key_name = try(var.key_name, null)
   tags = {
     Name = each.value
