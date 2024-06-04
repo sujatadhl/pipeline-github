@@ -12,6 +12,29 @@ env:
     AWS_DEFAULT_REGION: us-east-1
 
 jobs:
+    upload-to-s3:
+      runs-on: ubuntu-latest
+        
+      steps:
+        - name: Checkout code 
+          uses: actions/checkout@v3
+
+        - name: Install AWS CLI
+          run: |
+            sudo apt-get update
+            sudo apt install -y awscli  
+    
+        - name: Ensure S3 bucket is created
+          run: |
+            BUCKET_NAME="sujata-linux2"
+            if aws s3api head-bucket --bucket $BUCKET_NAME 2>/dev/null; then
+              aws s3 rb s3://$BUCKET_NAME --force
+            fi
+            aws s3api create-bucket --bucket $BUCKET_NAME --region us-east-1    
+         
+        - name: Add ansible file to s3
+          run: aws cp ansible/. s3://sujata-linux2  
+
     create-resources:
       runs-on: ubuntu-latest
         
@@ -45,7 +68,7 @@ jobs:
         - name: Run user data
           run: |
             cd terraform
-            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --subnet-id subnet-0f97b0bb45cdeb3b7 --user-data file://userdata.sh
+            aws ec2 run-instances --image-id ami-0d191299f2822b1fa --count 1 --instance-type t2.micro --subnet-id subnet-0f97b0bb45cdeb3b7 --user-data $(base64 userdata.sh  --wrap=0)
 
       
                 
