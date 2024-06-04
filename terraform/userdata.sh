@@ -7,6 +7,9 @@ sudo python3.8 -m ensurepip
 sudo python3.8 -m pip install --upgrade pip
 
 sudo python3.8 -m pip install ansible
+sudo python3.8 -m pip install botocore
+sudo python3.8 -m pip install boto3
+
 sudo amazon-linux-extras install -y awscli
 
 aws s3 cp s3://sujata-linux2 /home/ansible --recursive
