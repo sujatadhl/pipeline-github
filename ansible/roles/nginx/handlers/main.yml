@@ -4,7 +4,7 @@
     enabled: yes
     state: started
 
-- name: Restart Nginx
+- name: Restart nginx
   ansiblie.builtin.service:
     name: nginx
     enabled: yes
